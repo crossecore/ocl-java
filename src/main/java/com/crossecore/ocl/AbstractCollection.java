@@ -4,7 +4,7 @@
  * 
  * contributor: Simon Schwichtenberg
  */
-package Ocllib;
+package com.crossecore.ocl;
 
 import java.util.Collections;
 import java.util.HashSet;

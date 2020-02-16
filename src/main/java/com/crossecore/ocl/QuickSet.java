@@ -1,12 +1,11 @@
-package Ocllib;
+package com.crossecore.ocl;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class QuickSet<T> extends HashSet<T> implements Ocllib.Collection<T>{
+public class QuickSet<T> extends HashSet<T> implements com.crossecore.ocl.Collection<T>{
 
     private Class<?> dataClass = null;
 
@@ -16,13 +15,13 @@ public class QuickSet<T> extends HashSet<T> implements Ocllib.Collection<T>{
     }
 	
 	@Override
-	public boolean equals(Ocllib.Collection<T> c) {
+	public boolean equals(com.crossecore.ocl.Collection<T> c) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean notEquals(Ocllib.Collection<T> c) {
+	public boolean notEquals(com.crossecore.ocl.Collection<T> c) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -46,13 +45,13 @@ public class QuickSet<T> extends HashSet<T> implements Ocllib.Collection<T>{
 	}
 
 	@Override
-	public boolean includesAll(Ocllib.Collection<T> c2) {
+	public boolean includesAll(com.crossecore.ocl.Collection<T> c2) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean excludesAll(Ocllib.Collection<T> c2) {
+	public boolean excludesAll(com.crossecore.ocl.Collection<T> c2) {
 		// TODO Auto-generated method stub
 		return false;
 	}

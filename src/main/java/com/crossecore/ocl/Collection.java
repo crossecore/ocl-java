@@ -5,7 +5,7 @@
  * contributor: Simon Schwichtenberg
  */
 
-package Ocllib;
+package com.crossecore.ocl;
 
 import java.util.function.Function;
 

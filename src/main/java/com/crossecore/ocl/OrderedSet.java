@@ -5,7 +5,7 @@
  * contributor: Simon Schwichtenberg
  */
 
-package Ocllib;
+package com.crossecore.ocl;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -14,19 +14,28 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 public class OrderedSet<T> extends AbstractCollection<T> {
 
+	//private Class<?> dataClass = null;
     public OrderedSet(Class<?> dataClass)
     {
         super(dataClass);
+        //this.dataClass = dataClass;
     }
 
     public OrderedSet(Class<?> dataClass, InternalEObject owner, int featureId)
     {
     	super(dataClass, owner, featureId, NO_FEATURE);
+    	//this.dataClass = dataClass;
     }
 
     public OrderedSet(Class<?> dataClass,InternalEObject owner, int featureId, int oppositeFeatureId)
     {
     	super(dataClass, owner, featureId, oppositeFeatureId);
+    	//this.dataClass = dataClass;
+    }
+    
+    public OrderedSet(InternalEObject owner, int featureId, int oppositeFeatureId)
+    {
+    	super(null, owner, featureId, oppositeFeatureId);
     }
 	
 	
@@ -40,8 +49,7 @@ public class OrderedSet<T> extends AbstractCollection<T> {
 
         for (T element : this)
         {
-        	//skip notifications and reverse adding
-            result.doAddUnique(lambda.apply(element));
+            result.add(lambda.apply(element));
         }
 
         return result;
@@ -56,7 +64,7 @@ public class OrderedSet<T> extends AbstractCollection<T> {
         	Collection<T2> e = lambda.apply(element);
         	
         	for(T2 ee : e) {
-        		result.doAddUnique(ee);
+        		result.add(ee);
         	}
             
         }

@@ -5,9 +5,10 @@
  * contributor: Simon Schwichtenberg
  */
 
-package Ocllib;
+package com.crossecore.ocl;
 
 
+import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -15,19 +16,23 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 public class Set<T> extends AbstractCollection<T> {
 
+	//private Class<?> dataClass = null;
     public Set(Class<?> dataClass)
     {
         super(dataClass);
+//        this.dataClass = dataClass;
     }
 
     public Set(Class<?> dataClass, InternalEObject owner, int featureId)
     {
     	super(dataClass, owner, featureId, NO_FEATURE);
+//    	this.dataClass = dataClass;
     }
 
     public Set(Class<?> dataClass,InternalEObject owner, int featureId, int oppositeFeatureId)
     {
     	super(dataClass, owner, featureId, oppositeFeatureId);
+//    	this.dataClass = dataClass;
     }
     
     
@@ -36,7 +41,7 @@ public class Set<T> extends AbstractCollection<T> {
 
         for (T element : this)
         {
-            result.doAddUnique(lambda.apply(element));
+            result.add(lambda.apply(element));
         }
 
         return result;
@@ -52,7 +57,7 @@ public class Set<T> extends AbstractCollection<T> {
         	Collection<T2> e = lambda.apply(element);
         	
         	for(T2 ee : e) {
-        		result.doAddUnique(ee);
+        		result.add(ee);
         	}
             
         }
@@ -68,11 +73,39 @@ public class Set<T> extends AbstractCollection<T> {
         {
         	if(lambda.test(element)) {
         		
-        		result.doAddUnique(element);
+        		result.add(element);
         	}
         }
 
         return result;
+    }
+    
+    public <R> OrderedSet<T> sortedBy(Function<T, R> lambda){
+    	
+    	//temporary data structure needs to allow duplicates
+    	Sequence<T> result = new Sequence<T>(getDataClass());
+    	
+    	result.addAll(this);
+    	
+    	result.sort(new Comparator<T>(){
+  		  public int compare(T p1, T p2){
+			  
+  			R r1 = lambda.apply(p1);
+  			R r2 = lambda.apply(p2);
+  			
+
+  			if(r1 instanceof Comparable) {
+  				
+  				return ((Comparable)r1).compareTo(r2);
+  			}
+  			
+  			return 0;
+  		    
+  		  }
+  		});
+    	
+    	return result.asOrderedSet();
+    	
     }
     
     
