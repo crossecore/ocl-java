@@ -50,8 +50,8 @@ publishing {
             def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
-                username sonatypeUser
-                password sonatypePassword
+                username project.hasProperty('sonatypeUser') ? project.getProperty('sonatypeUser'):''
+                password project.hasProperty('sonatypePassword') ? project.getProperty('sonatypePassword'):''
                 //password project.hasProperty('password') ? project.getProperty('password'):''
                 
             }
