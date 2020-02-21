@@ -2,14 +2,14 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+//apply plugin: 'signing'
 
+version = '0.1.0-SNAPSHOT'
 
 repositories.jcenter()
 
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
+
+
 
 publishing {
     publications {
@@ -18,7 +18,6 @@ publishing {
             
             groupId 'com.crossecore'
             artifactId 'com.crossecore.ocl'
-            version '0.1.0'
             
             pom {
                 name = 'CrossEcore OCL Library'
@@ -46,8 +45,25 @@ publishing {
     }
     repositories {
         mavenLocal()
+        maven {
+            def releasesRepoUrl = "https://oss.sonatype.org/content/repositories/releases/"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username sonatypeUser
+                password sonatypePassword
+                //password project.hasProperty('password') ? project.getProperty('password'):''
+                
+            }
+        }
     }
 }
+
+/*
+signing {
+    sign publishing.publications.mavenJava
+}
+*/
 
 dependencies {
     
